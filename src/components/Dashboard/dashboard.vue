@@ -1,18 +1,24 @@
 <template>
-    <h1>Here is the DASHBOARD!</h1>
+  <div>
+    <sales></sales>
+  </div>
 </template>
+
 <script>
+import Sales from './yearSales'
 export default {
   data() {
     return {
-            
     }
   },
-  methods: {
-  },
-  created() {
-    this.$store.dispatch('fetchSales')
+  components: {
+    Sales
   }
 }
 </script>
-,
+<style scoped>
+  v-flex {
+    margin-top: 20px;
+  }
+</style>
+

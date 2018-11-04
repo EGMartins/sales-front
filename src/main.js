@@ -1,9 +1,10 @@
 import Vue from 'vue'
+import VueChartkick from 'vue-chartkick'
 import './plugins/vuetify'
 import App from './App.vue'
 // import axios from 'axios'
 import VueRouter from 'vue-router'
-import store from './store/store'
+import { store } from './store/store'
 
 import { routes } from './routes'
 
@@ -11,6 +12,7 @@ import { routes } from './routes'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(VueChartkick)
 
 const router = new VueRouter({
   mode: 'history',

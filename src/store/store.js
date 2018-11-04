@@ -4,17 +4,21 @@ import axios from '../axios-auth'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+export const store = new Vuex.Store({
     state: {
         authToken: localStorage.getItem('token') || '',
-        salesData: null
+        salesData: null,
+        salesYearData: null
     },
     getters: {
-        allData(state) {
-            state.salesData
+        allData: state => {
+            return state.salesData
         },
-        authToken(state) {
-            state.authToken
+        yearSales: state => {
+            return state.salesYearData
+        },
+        authToken: state => {
+            return state.authToken
         }
     },
     mutations: {
@@ -27,8 +31,14 @@ const store = new Vuex.Store({
         unsetSales(state) {
             state.salesData = null
         },
+        unsetYearSales(state) {
+            state.salesYearData = null
+        },
         salesData(state, salesData) {
             state.salesData = salesData.sales
+        },
+        salesYearData(state, salesYearData) {
+            state.salesYearData = salesYearData.sales
         }
     },
     actions: {
@@ -62,6 +72,7 @@ const store = new Vuex.Store({
             localStorage.removeItem('token')
             commit('deauthUser')
             commit('unsetSales')
+            commit('unsetYearSales')
         },
         fetchSales({commit}) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
@@ -73,8 +84,17 @@ const store = new Vuex.Store({
                 })
             })
             .catch(error => console.log(error))
+        },
+        fetchYearSales({commit}) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+            axios.get('/this_year_sales')
+            .then(res => {
+                console.log(res.data)
+                commit('salesYearData', {
+                    sales: res.data
+                })
+            })
+            .catch(error => console.log(error))
         }
     }
 })
-
-export default store
