@@ -8,10 +8,10 @@
               <h4>Login</h4>
             </v-card-title>
             <v-form>
-            <v-text-field prepend-icon="email" name="email" label="E-mail"></v-text-field>
-            <v-text-field prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
+            <v-text-field v-model="email" prepend-icon="email" name="email" label="E-mail"></v-text-field>
+            <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
             <v-card-actions>
-              <v-btn primary large block>Send</v-btn>
+              <v-btn @click="onLogin" primary large block>Send</v-btn>
             </v-card-actions>
             </v-form>
           </v-card>
@@ -21,8 +21,34 @@
   </v-container>
 </template>
 <script>
+import axios from '../../axios-auth.js'
 export default {
-    name: 'Login'
+    name: 'Login',
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      onLogin() {
+        const loginData = {
+          email: this.email,
+          password: this.password
+        }
+        console.log(loginData)
+        axios.post('/auth/login', loginData)
+          .then(res => { 
+            console.log(res)
+            this.clearForm 
+          })
+          .catch(error => { console.log(error) })
+      },
+      clearForm() {
+        this.email = '',
+        this.password = ''
+      }
+    }
 }
 </script>
 <style>
