@@ -1,18 +1,21 @@
 <template>
   <div>
     <sales></sales>
+    <growth></growth>
   </div>
 </template>
 
 <script>
 import Sales from './yearSales'
+import Growth from './twoYearsSales'
 export default {
   data() {
     return {
     }
   },
   components: {
-    Sales
+    Sales,
+    Growth
   }
 }
 </script>

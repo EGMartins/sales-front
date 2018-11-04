@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
     state: {
         authToken: localStorage.getItem('token') || '',
         salesData: null,
-        salesYearData: null
+        salesYearData: null,
+        twoYearsData: null
     },
     getters: {
         allData: state => {
@@ -16,6 +17,9 @@ export const store = new Vuex.Store({
         },
         yearSales: state => {
             return state.salesYearData
+        },
+        twoYearsSales: state => {
+            return state.twoYearsData
         },
         authToken: state => {
             return state.authToken
@@ -39,6 +43,9 @@ export const store = new Vuex.Store({
         },
         salesYearData(state, salesYearData) {
             state.salesYearData = salesYearData.sales
+        },
+        twoYearsData(state, twoYearData) {
+            state.twoYearsData = twoYearData.sales
         }
     },
     actions: {
@@ -91,6 +98,17 @@ export const store = new Vuex.Store({
             .then(res => {
                 console.log(res.data)
                 commit('salesYearData', {
+                    sales: res.data
+                })
+            })
+            .catch(error => console.log(error))
+        },
+        fetchTwoYearsSales({commit}) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+            axios.get('/two_years_sales')
+            .then(res => {
+                console.log(res.data)
+                commit('twoYearsData', {
                     sales: res.data
                 })
             })

@@ -4,11 +4,11 @@
       <v-card>
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">Yearly sales</h3>
-            <div>Here are your sales on the current year</div>
+            <h3 class="headline mb-0">Gross Profit</h3>
+            <div>Here are your gross profit comparing last two years</div>
           </div>
         </v-card-title>
-        <column-chart label="Sales" :library="{backgroundColor: '#f4f2f2'}" :data="yearSales"></column-chart>
+        <bar-chart :colors="['#b00', '#666']" label="Profit" :library="{backgroundColor: '#f4f2f2'}" :data="twoYearsSales"></bar-chart>
       </v-card>
     </v-flex>
   </v-layout>
@@ -24,12 +24,12 @@ export default {
   methods: {
   },
   computed: {
-    yearSales() {
-      return this.$store.getters['yearSales']
+    twoYearsSales() {
+      return this.$store.getters['twoYearsSales']
     }
   },
   created() {
-    this.$store.dispatch('fetchYearSales')
+    this.$store.dispatch('fetchTwoYearsSales')
   }
 }
 </script>
