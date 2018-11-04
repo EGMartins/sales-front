@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import './plugins/vuetify'
 import App from './App.vue'
-import sxios from 'axios'
+// import axios from 'axios'
 import VueRouter from 'vue-router'
 
 import { routes } from './routes'
-import Axios from 'axios';
 
-Axios.defaults.baseURL = 'http:localhost:3000'
+// axios.defaults.baseURL = 'http:localhost:3000'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
