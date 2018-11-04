@@ -23,7 +23,6 @@
   </v-container>
 </template>
 <script>
-import axios from '../../axios-auth.js'
 export default {
     name: 'Signup',
     data() {
@@ -48,12 +47,8 @@ export default {
           password: this.password,
           password_confirmation: this.password_confirmation
         }
-        axios.post('/signup', formData)
-          .then(res => {
-            console.log(res)
-            this.clearForm()
-          })
-          .catch(error => console.log(error))
+        this.$store.dispatch('signup', formData)
+        this.clearForm
       }
     }
 }

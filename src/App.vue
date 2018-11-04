@@ -12,6 +12,16 @@
                 Signup
               </router-link> 
             </v-btn>
+            <v-btn flat>
+              <router-link to="/dashboard">
+                Dashboard
+              </router-link>
+            </v-btn>
+            <v-btn @click="signout" flat>
+              <router-link to="/">
+                Signout
+              </router-link>
+            </v-btn>
         </v-toolbar-items>  
     </v-toolbar>
     <v-content>
@@ -27,6 +37,11 @@ export default {
   data () {
     return {
       //
+    }
+  },
+  methods: {
+    signout() {
+      this.$store.dispatch('logout')
     }
   }
 }

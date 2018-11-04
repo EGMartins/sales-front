@@ -21,7 +21,6 @@
   </v-container>
 </template>
 <script>
-import axios from '../../axios-auth.js'
 export default {
     name: 'Login',
     data() {
@@ -37,12 +36,8 @@ export default {
           password: this.password
         }
         console.log(loginData)
-        axios.post('/auth/login', loginData)
-          .then(res => { 
-            console.log(res)
-            this.clearForm 
-          })
-          .catch(error => { console.log(error) })
+        this.clearForm
+        this.$store.dispatch('login', loginData)
       },
       clearForm() {
         this.email = '',

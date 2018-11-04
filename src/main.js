@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import App from './App.vue'
 // import axios from 'axios'
 import VueRouter from 'vue-router'
+import store from './store/store'
 
 import { routes } from './routes'
 
@@ -15,8 +16,9 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
-
+ 
 new Vue({
   render: h => h(App),
-  router,
+  store,
+  router
 }).$mount('#app')
