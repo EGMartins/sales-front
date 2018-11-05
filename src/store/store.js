@@ -2,11 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios-auth'
 
+
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        authToken: localStorage.getItem('token') || '',
+        authToken: localStorage.getItem('token') || null,
         salesData: null,
         salesYearData: null,
         twoYearsData: null
@@ -23,6 +24,9 @@ export const store = new Vuex.Store({
         },
         authToken: state => {
             return state.authToken
+        },
+        isAuthenticate: state => {
+            return state.authToken !== null
         }
     },
     mutations: {
@@ -30,13 +34,16 @@ export const store = new Vuex.Store({
             state.authToken = userData.token
         },
         deauthUser(state) {
-            state.authToken = ''
+            state.authToken = null
         },
         unsetSales(state) {
             state.salesData = null
         },
         unsetYearSales(state) {
             state.salesYearData = null
+        },
+        unsetTwoYearsSales(state) {
+            state.twoYearsData = null
         },
         salesData(state, salesData) {
             state.salesData = salesData.sales
@@ -72,6 +79,7 @@ export const store = new Vuex.Store({
                 })
                 localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = token
+                this.$router.push('dashboard')
             })
             .catch(error => { console.log(error) })
         },
@@ -80,6 +88,7 @@ export const store = new Vuex.Store({
             commit('deauthUser')
             commit('unsetSales')
             commit('unsetYearSales')
+            commit('unsetTwoYearsSales')
         },
         fetchSales({commit}) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')

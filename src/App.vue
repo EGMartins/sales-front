@@ -7,20 +7,14 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn flat>
-              <router-link to="/signup">
-                Signup
-              </router-link> 
+            <v-btn to="/signup" v-if="!auth" flat>
+              Signup 
             </v-btn>
-            <v-btn flat>
-              <router-link to="/dashboard">
-                Dashboard
-              </router-link>
+            <v-btn to="/dashboard" v-if="auth" flat>
+              Dashboard
             </v-btn>
-            <v-btn @click="signout" flat>
-              <router-link to="/">
-                Signout
-              </router-link>
+            <v-btn to="/" v-if="auth" @click="signout" flat>
+              Signout
             </v-btn>
         </v-toolbar-items>  
     </v-toolbar>
@@ -42,6 +36,11 @@ export default {
   methods: {
     signout() {
       this.$store.dispatch('logout')
+    }
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.isAuthenticate
     }
   }
 }

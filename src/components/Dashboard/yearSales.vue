@@ -4,8 +4,8 @@
       <v-card>
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">Yearly sales</h3>
-            <div>Here are your sales on the current year</div>
+            <h3 class="headline mb-0">Monthly sales</h3>
+            <div>Here are your monthly sales on the current year</div>
           </div>
         </v-card-title>
         <column-chart label="Sales" :library="{backgroundColor: '#f4f2f2'}" :data="yearSales"></column-chart>

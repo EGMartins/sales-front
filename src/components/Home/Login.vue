@@ -8,10 +8,18 @@
               <h4>Login</h4>
             </v-card-title>
             <v-form>
+              <p v-if="errors.length">
+                <b>Please, fix the issues:</b>
+                <ul>
+                  <li v-for="error in errors">{{ error }}</li>
+                </ul>
+              </p>
             <v-text-field v-model="email" prepend-icon="email" name="email" label="E-mail"></v-text-field>
             <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
             <v-card-actions>
-              <v-btn @click="onLogin" primary large block>Send</v-btn>
+              <v-btn @click="checkForm" primary large block>
+                Login
+              </v-btn>
             </v-card-actions>
             </v-form>
           </v-card>
@@ -26,7 +34,8 @@ export default {
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        errors: []
       }
     },
     methods: {
@@ -36,13 +45,30 @@ export default {
           password: this.password
         }
         console.log(loginData)
-        this.clearForm
         this.$store.dispatch('login', loginData)
+          .then(() => {
+            setTimeout(() => {
+              this.$router.push("dashboard")
+            },500)
+          })
       },
-      clearForm() {
-        this.email = '',
-        this.password = ''
+      checkForm: function (e) {
+        if (this.email && this.password) {
+          this.onLogin();
+        }
+
+        this.errors = [];
+
+        if (!this.email) {
+          this.errors.push('Fill the e-mail field.');
+        }
+        if (!this.password) {
+          this.errors.push('Fill the password field.');
+        }
+
+        e.preventDefault();
       }
+
     }
 }
 </script>
