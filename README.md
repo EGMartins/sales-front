@@ -23,4 +23,4 @@ npm run build
 ```
 npm run lint
 ```
-**To set the base URL for the http calls, just edit the _axios-auth_ on the root folder.**
+**To set the base URL for the http calls, just edit the _axios-auth_ file on the root folder.**
