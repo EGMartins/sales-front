@@ -1,6 +1,10 @@
 # sales-front
+*A simple interfaco to provide login and show a dashboard to the logged user*
 
 ## Project setup
+
+On the project folder simply run
+
 ```
 npm install
 ```
@@ -19,3 +23,4 @@ npm run build
 ```
 npm run lint
 ```
+**To set the base URL for the http calls, just edit the _axios-auth_ on the root folder.**
