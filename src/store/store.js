@@ -70,7 +70,7 @@ export const store = new Vuex.Store({
             .catch(error => console.log(error))
         },
         login({commit}, authData) {
-            axios.post('/auth/login', authData)
+            axios.post('auth/login', authData)
             .then(res => {
                 console.log(res)
                 let token = res.data.auth_token
@@ -79,7 +79,7 @@ export const store = new Vuex.Store({
                 })
                 localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = token
-                this.$router.push('dashboard')
+                // this.$router.push('dashboard')
             })
             .catch(error => { console.log(error) })
         },
